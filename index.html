@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Tournament App - Compete, Win and Dominate.">
+
+    <meta name="theme-color" content="#080808">
+
+    <title>Tournament App | Compete. Win. Dominate.</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070707;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            width: 100%;
+            padding: 15px 6%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(7, 7, 7, 0.92);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .brand-name {
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #bdbdbd;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .nav-download {
+            padding: 11px 18px;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #000000 !important;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 88vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 80px 20px;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(255,255,255,0.12),
+                    transparent 45%
+                );
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 8px 15px;
+            margin-bottom: 25px;
+
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50px;
+
+            color: #cccccc;
+            font-size: 13px;
+
+            background: rgba(255,255,255,0.04);
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 9vw, 85px);
+            line-height: 0.98;
+
+            font-weight: 900;
+            letter-spacing: -4px;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #a8a8a8;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+
+            color: #aaaaaa;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 25px;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+            font-weight: 800;
+
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.12);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #ffffff;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* ================= GENERAL ================= */
+
+        section {
+            padding: 90px 6%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(30px, 5vw, 48px);
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #999999;
+            font-size: 15px;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about p {
+            color: #aaaaaa;
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features-grid {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            padding: 30px;
+
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 20px;
+
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,0.06),
+                rgba(255,255,255,0.015)
+            );
+
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .feature-icon {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .feature-card p {
+            color: #999999;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* ================= TOURNAMENT ================= */
+
+        .specs {
+            max-width: 900px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .spec {
+            padding: 22px;
+
+            border-radius: 15px;
+
+            background: #101010;
+            border: 1px solid rgba(255,255,255,0.08);
+
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .spec span:first-child {
+            color: #888888;
+        }
+
+        .spec span:last-child {
+            font-weight: 800;
+            text-align: right;
+        }
+
+        /* ================= SCREENSHOTS ================= */
+
+        .screenshots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .phone {
+            width: 230px;
+
+            border-radius: 25px;
+
+            padding: 7px;
+
+            background: #151515;
+            border: 1px solid rgba(255,255,255,0.12);
+
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+
+            transition: 0.3s;
+        }
+
+        .phone:hover {
+            transform: translateY(-10px);
+        }
+
+        .phone img {
+            width: 100%;
+            height: auto;
+
+            display: block;
+
+            border-radius: 20px;
+        }
+
+        /* ================= DOWNLOAD ================= */
+
+        .download-section {
+            text-align: center;
+
+            padding-top: 110px;
+            padding-bottom: 110px;
+        }
+
+        .download-box {
+            max-width: 850px;
+            margin: auto;
+
+            padding: 60px 25px;
+
+            border-radius: 25px;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(255,255,255,0.10),
+                    transparent 60%
+                );
+
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .download-box h2 {
+            font-size: clamp(32px, 6vw, 55px);
+            margin-bottom: 15px;
+            font-weight: 900;
+        }
+
+        .download-box p {
+            color: #999999;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            padding: 17px 30px;
+
+            border-radius: 13px;
+
+            background: #ffffff;
+            color: #000000;
+
+            font-weight: 900;
+            font-size: 16px;
+
+            transition: 0.3s;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.12);
+        }
+
+        .download-info {
+            margin-top: 18px;
+            color: #666666;
+            font-size: 12px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            padding: 30px 6%;
+
+            border-top: 1px solid rgba(255,255,255,0.08);
+
+            text-align: center;
+
+            color: #666666;
+            font-size: 13px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .specs {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 70px 5%;
+            }
+
+            .hero {
+                min-height: 80vh;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .phone {
+                width: 190px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .phone {
+                width: 160px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .brand-name {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <a href="#" class="brand">
+
+            <img src="logo.png" alt="Tournament App Logo">
+
+            <div class="brand-name">
+                Tournament App
+            </div>
+
+        </a>
+
+        <div class="nav-links">
+
+            <a href="#about">About</a>
+
+            <a href="#features">Features</a>
+
+            <a href="#screenshots">Screenshots</a>
+
+            <a href="#download" class="nav-download">
+                Download
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                🎮 NEXT LEVEL TOURNAMENT EXPERIENCE
+            </div>
+
+            <h1>
+                Compete.<br>
+                <span>Win. Dominate.</span>
+            </h1>
+
+            <p>
+                Join tournaments, compete with players,
+                track your matches and experience
+                competitive gaming like never before.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#download"
+                   class="btn btn-primary">
+                    🚀 Download App
+                </a>
+
+                <a href="#features"
+                   class="btn btn-secondary">
+                    Explore Features
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section id="about">
+
+        <div class="section-title">
+
+            <h2>About The App</h2>
+
+            <p>
+                Everything you need for competitive tournaments.
+            </p>
+
+        </div>
+
+        <div class="about">
+
+            <p>
+                Tournament App is designed for gamers who love
+                competition. Discover tournaments, join matches,
+                follow your progress and stay connected with
+                the competitive gaming community — all from
+                one simple app.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section id="features">
+
+        <div class="section-title">
+
+            <h2>Powerful Features</h2>
+
+            <p>
+                Built to make tournament gaming simple and exciting.
+            </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🏆
+                </div>
+
+                <h3>
+                    Tournaments
+                </h3>
+
+                <p>
+                    Find and participate in competitive
+                    tournaments with an easy-to-use interface.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Fast Experience
+                </h3>
+
+                <p>
+                    Lightweight app experience designed
+                    for quick access and smooth navigation.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Track Progress
+                </h3>
+
+                <p>
+                    Keep track of your matches, results
+                    and tournament progress.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🎮
+                </div>
+
+                <h3>
+                    Gaming Focused
+                </h3>
+
+                <p>
+                    A dedicated platform created around
+                    competitive gaming and tournaments.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔥
+                </div>
+
+                <h3>
+                    Competitive
+                </h3>
+
+                <p>
+                    Challenge yourself, improve your skills
+                    and compete against other players.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📱
+                </div>
+
+                <h3>
+                    Mobile Ready
+                </h3>
+
+                <p>
+                    Designed for Android devices with
+                    a clean and responsive interface.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= TOURNAMENT INFO ================= -->
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>Tournament Info</h2>
+
+            <p>
+                Example tournament specifications
+            </p>
+
+        </div>
+
+
+        <div class="specs">
+
+            <div class="spec">
+
+                <span>
+                    🎮 Game
+                </span>
+
+                <span>
+                    Multiple Games
+                </span>
+
+            </div>
+
+
+            <div class="spec">
+
+                <span>
+                    🏆 Tournament Type
+                </span>
+
+                <span>
+                    Competitive
+                </span>
+
+            </div>
+
+
+            <div class="spec">
+
+                <span>
+                    👥 Players
+                </span>
+
+                <span>
+                    Multiple Players
+                </span>
+
+            </div>
+
+
+            <div class="spec">
+
+                <span>
+                    🎟️ Entry
+                </span>
+
+                <span>
+                    Free
+                </span>
+
+            </div>
+
+
+            <div class="spec">
+
+                <span>
+                    📱 Platform
+                </span>
+
+                <span>
+                    Android
+                </span>
+
+            </div>
+
+
+            <div class="spec">
+
+                <span>
+                    📦 App Size
+                </span>
+
+                <span>
+                    Lightweight
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SCREENSHOTS ================= -->
+
+    <section id="screenshots">
+
+        <div class="section-title">
+
+            <h2>App Screenshots</h2>
+
+            <p>
+                Take a look inside the app.
+            </p>
+
+        </div>
+
+
+        <div class="screenshots">
+
+            <div class="phone">
+
+                <img src="screenshot1.png"
+                     alt="Tournament App Screenshot 1">
+
+            </div>
+
+
+            <div class="phone">
+
+                <img src="screenshot2.png"
+                     alt="Tournament App Screenshot 2">
+
+            </div>
+
+
+            <div class="phone">
+
+                <img src="screenshot3.png"
+                     alt="Tournament App Screenshot 3">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DOWNLOAD ================= -->
+
+    <section id="download"
+             class="download-section">
+
+        <div class="download-box">
+
+            <h2>
+                Ready to Compete?
+            </h2>
+
+            <p>
+                Download the Tournament App and
+                start your competitive gaming journey.
+            </p>
+
+
+            <!-- APK DOWNLOAD LINK -->
+
+            <a
+                href="https://github.com/surajkbh/GAME3X-APK/releases/latest/download/TournamentApp-v1.0.0.apk"
+                class="download-btn"
+                target="_blank"
+                rel="noopener">
+
+                📲 Download APK
+
+            </a>
+
+
+            <div class="download-info">
+
+                Android • Tournament App • v1.0.0
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        © 2026 Tournament App.
+        All rights reserved.
+
+    </footer>
+
+
+</body>
+</html>
